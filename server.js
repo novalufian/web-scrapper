@@ -36,10 +36,12 @@ function getMangaList(myurl) {
 }
 
 function getCapterList(manga) {
-    manga.forEach(function (el, i) {
-        console.log()
-        reqGetCapter(el)
-    })
+    for(var k = 50, length3 = manga.length; k < 70; k++){
+        reqGetCapter(manga[k])
+    }
+    // manga.forEach(function (el, i) {
+    //     reqGetCapter(el)
+    // })
 }
 
 function reqGetCapter(el) {
