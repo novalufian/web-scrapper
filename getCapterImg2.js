@@ -10,7 +10,7 @@ let manga = [];
 fs.readFile('manga.json', 'utf8', function(err, contents) {
     contents = JSON.parse(contents)
     console.log(contents.length);
-        for(var k = 0, length3 = 1; k < length3; k++){
+        for(var k = 0, length3 = 5; k < length3; k++){
             getEpisodeLink(contents[k]['manga-url'], contents[k]);
         }
 });
@@ -42,16 +42,15 @@ function getEpisodeLink(mylink, mangaData) {
 }
 
 function getImg(capterLink, cb) {
+    var img = []
     request(capterLink, function (err, res, body) {
         if (err && res.statusCode !== 200) throw err;
         let $ = cheerio.load(body);
-        var img = []
-        $('div#readerareaimg p').each((i, value) => {
+        $('div#readerareaimg p ').each((i, value) => {
             $(value).find('img').each((j, data) => {
-               img.push($(data).attr("src"))
+                img.push($(data).attr("src"))
             });
-            console.log(img)
-            cb(img)
+            cb(img);
         });
 
     })
